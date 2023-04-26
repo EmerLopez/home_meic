@@ -124,7 +124,7 @@ public class PanelDeInicio extends AppCompatActivity implements NavigationView.O
         mueblesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PanelDeInicio.this, MainActivity.class);
+                Intent intent = new Intent(PanelDeInicio.this, lista_amigos.class);
                 Pair[] pairs = new Pair[1];
 
 
