@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".IniciarSesion"
+    android:orientation="vertical"
+    android:background="@drawable/card_5"
+    android:padding="20dp">
+
+    <ImageView
+        android:id="@+id/ini_logo_imagen"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:transitionName="logo_imagen1"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/logo"/>
+
+    <TextView
+        android:id="@+id/ini_hola"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:transitionName="logo_texto2"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/fredoka_one"
+        android:text="Hola, bienvenido de nuevo"
+        android:textColor="@color/black"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/ini_iniciar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Iniciar sesión para continuar"
+        android:transitionName="iniciar_logo3"
+        android:textSize="16sp"
+        android:fontFamily="@font/fredoka_one"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ini_nombre_usuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:transitionName="nombre_logo4"
+            android:hint="Nombre de usuaio"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ini_contrasena"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:transitionName="contrasena_logo5"
+            android:hint="Contraseña"
+            app:passwordToggleEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:text="Olvido la contraseña?"
+            android:textSize="11sp"
+            android:textColor="@color/black"
+            android:layout_gravity="right"
+            android:elevation="0dp"
+            android:layout_margin="5dp"
+            android:fontFamily="@font/fredoka_one"/>
+
+        <Button
+            android:id="@+id/ini_continuar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:transitionName="continuar_logo6"
+            android:text="Continuar"
+            android:textSize="11sp"
+            android:background="#000"
+            android:textColor="@color/white"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/fredoka_one"/>
+
+        <Button
+            android:id="@+id/ini_registrarse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:transitionName="registrarse_logo7"
+            android:text="Registrarse"
+            android:textSize="11sp"
+            android:background="#00000000"
+            android:textColor="@color/black"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/fredoka_one"/>
+
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

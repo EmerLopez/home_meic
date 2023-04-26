@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="2dp"
+    app:cardElevation="8dp"
+    android:background="@color/lightWhite">
+    
+    <LinearLayout
+        android:layout_width="230dp"
+        android:layout_height="400dp"
+        android:padding="10dp"
+        android:background="@color/card6">
+        
+        <ImageView
+            android:id="@+id/ms_mueble"
+            android:layout_width="210dp"
+            android:layout_height="300dp"
+            android:src="@drawable/producto2"
+            android:scaleType="centerCrop"/>
+        
+        <TextView
+            android:id="@+id/ms_texto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mueble"
+            android:textColor="@color/card6"
+            android:layout_toRightOf="@id/ms_mueble"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"
+            android:fontFamily="@font/fredoka_one"/>
+ 
+        <TextView
+            android:id="@+id/ms_texto1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Juego de comedor"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:layout_below="@id/ms_texto"
+            android:layout_toRightOf="@id/ms_mueble"
+            android:fontFamily="@font/fredoka_one"/>
+
+        <TextView
+            android:id="@+id/ms_oferta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Especial Online $499"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:layout_below="@id/ms_texto1"
+            android:layout_toRightOf="@id/ms_mueble"
+            android:fontFamily="@font/fredoka_one"/>
+
+        <ImageView
+            android:id="@+id/ms_logo"
+            android:layout_width="60dp"
+            android:layout_height="65dp"
+            android:src="@drawable/logo"
+            android:layout_below="@id/ms_oferta"
+            android:layout_alignParentRight="true"
+            android:layout_marginHorizontal="35dp"/>
+
+        <TextView
+            android:id="@+id/ms_exclusivo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exclusivo en:"
+            android:fontFamily="@font/fredoka_one"
+            android:layout_below="@+id/ms_oferta"
+            android:layout_toLeftOf="@id/ms_logo"
+            android:layout_marginTop="30dp"/>
+
+        <TextView
+            android:id="@+id/ms_nombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Electroic Home"
+            android:textColor="@color/black"
+            android:fontFamily="@font/carter_one"
+            android:layout_below="@+id/ms_logo"
+            android:layout_marginHorizontal="265dp"/>
+
+
+
+        
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

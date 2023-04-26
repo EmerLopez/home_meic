@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFC107</color>
+    <color name="colorPrimaryDark">#DD582E</color>
+    <color name="colorAccent">#1E1D20</color>
+    <color name="colorOnPrimary">#FF000000</color>
+
+
+    <color name="lightWhite">#F5F5F5</color>
+    <color name="white">#FFF</color>
+    <color name="black">#FF000000</color>
+
+    <color name="home_background">#F2F5F8</color>
+    <color name="banner_background">#F1E9CE</color>
+    <color name="banner_background_light">#56F1E9CE</color>
+    <color name="banner_background_icono">#D0FFDD6B</color>
+
+
+    <color name="card1">#D4CBE5</color>
+    <color name="card2">#7ADCCF</color>
+    <color name="card3">#F7C59F</color>
+    <color name="card4">#B8D7F5</color>
+    <color name="card5">#D39784</color>
+    <color name="card6">#F9DCFD</color>
+    <color name="card7">#D1EFAE</color>
+    <color name="card8">#5EA111</color>
+    <color name="card9">#D0FFDD6B</color>
+    <color name="card10">#F6D8D0</color>
+    <color name="card11">#ECC4F3</color>
+    <color name="card12">#C0DBF1</color>
+
+
+
+    <color name="colorLogin">#DDB642</color>
+    <color name="colorUsuario">#B8D7F5</color>
+    <color name="colorContraseña">#D39784</color>
+
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+
+</resources>
