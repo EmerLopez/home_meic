@@ -1,5 +1,6 @@
 package com.ugb.home_meic;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -23,6 +24,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class lista_amigos extends AppCompatActivity {
@@ -34,6 +38,10 @@ public class lista_amigos extends AppCompatActivity {
     final ArrayList<amigos> alAmigos = new ArrayList<amigos>();
     final ArrayList<amigos> alAmigosCopy = new ArrayList<amigos>();
     amigos misAmigos;
+    JSONArray datosJSON; //datos del servidor
+    JSONObject jsonObject;
+    ProgressDialog progreso; //barra de progreso
+    obtenerDatosServidor datosServidor;
     protected void onCreate(Bundle instance){
         super.onCreate(instance);
         setContentView(R.layout.lista_amigos);
@@ -64,6 +72,8 @@ public class lista_amigos extends AppCompatActivity {
         cAMigos.moveToPosition(info.position);
         menu.setHeaderTitle(cAMigos.getString(1)); //1=> Nombre del amigo...
     }
+
+
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
@@ -123,37 +133,88 @@ public class lista_amigos extends AppCompatActivity {
     }
     public void obtenerDatosAmigos(){
         try {
-            alAmigos.clear();
-            alAmigosCopy.clear();
+
+
             db_agenda = new BD(lista_amigos.this, "", null, 1);
             cAMigos = db_agenda.consultar_agenda();
             if(cAMigos.moveToFirst()){
-                lts = findViewById(R.id.ltsAmigos);
+
                 /*final ArrayAdapter<String> adAmigos = new ArrayAdapter<String>(lista_amigos.this,
                         android.R.layout.simple_expandable_list_item_1, alAmigos);
                 lts.setAdapter(adAmigos);*/
+                datosJSON = new JSONArray();
+
                 do{
                     //alAmigos.add(cAMigos.getString(1));//1 es el nombre del amigo, pues 0 es el idAmigo.
-                    misAmigos = new amigos(
-                            cAMigos.getString(0),//idAmigo
-                            cAMigos.getString(1),//nombre
-                            cAMigos.getString(2),//direccion
-                            cAMigos.getString(3),//telefono
-                            cAMigos.getString(4),//email
-                            cAMigos.getString(5) //urlFotoAmigo
-                    );
-                    alAmigos.add(misAmigos);
+                    jsonObject= new JSONObject();
+                    JSONObject jsonObjectvalue= new JSONObject();
+                    jsonObject.put("_id",cAMigos.getString(0));
+                    jsonObject.put("_rev",cAMigos.getString(0));
+                    jsonObject.put("nombre",cAMigos.getString(1));
+                    jsonObject.put("direccion",cAMigos.getString(2));
+                    jsonObject.put("telefono",cAMigos.getString(3));
+                    jsonObject.put("email",cAMigos.getString(4));
+                    jsonObject.put("urlFoto",cAMigos.getString(5));
+                    jsonObjectvalue.put("value",jsonObject);
+
+                    datosJSON.put(jsonObjectvalue);
+
                 }while(cAMigos.moveToNext());
-                adaptadorImagenes adImagenes = new adaptadorImagenes(getApplicationContext(), alAmigos);
-                lts.setAdapter(adImagenes);
-                alAmigosCopy.addAll(alAmigos);
-                //adAmigos.notifyDataSetChanged();
-                registerForContextMenu(lts);
+
+                mostrarDatosAmigos();
             }else{
-                Toast.makeText(this, "NO HAY datos que mostrar", Toast.LENGTH_SHORT).show();
+                ObtenerDatosAmigosServer();
+                Toast.makeText(this, "Sincronizando con el servidor", Toast.LENGTH_SHORT).show();
             }
         }catch (Exception e){
             Toast.makeText(this, "Error al obtener amigos: "+ e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+    void ObtenerDatosAmigosServer(){
+        try {
+            datosServidor = new obtenerDatosServidor();
+            String data = datosServidor.execute().get();
+            jsonObject = new JSONObject(data);
+            datosJSON = jsonObject.getJSONArray("rows");
+            mostrarDatosAmigos();
+
+            Toast.makeText(this, "DATA: "+data, Toast.LENGTH_SHORT).show();
+        }catch (Exception ex){
+            Toast.makeText(this, "Error al obtener datos desde el servidor"+ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+    }
+    void mostrarDatosAmigos(){
+        try {
+
+        if (datosJSON.length()>0){
+            lts = findViewById(R.id.ltsAmigos);
+            alAmigos.clear();
+            alAmigosCopy.clear();
+            JSONObject misDatosJSONObject;
+            for (int i = 0;i<datosJSON.length();i++){
+                misDatosJSONObject=datosJSON.getJSONObject(i).getJSONObject("value");
+                misAmigos = new amigos(
+                       misDatosJSONObject.getString("_id"),
+                       misDatosJSONObject.getString("_rev"),
+                       misDatosJSONObject.getString("nombre"),
+                       misDatosJSONObject.getString("telefono"),
+                       misDatosJSONObject.getString("email"),
+                       misDatosJSONObject.getString("urlFoto")
+                );
+                alAmigos.add(misAmigos);
+            }
+            adaptadorImagenes adImagenes = new adaptadorImagenes(getApplicationContext(), alAmigos);
+            lts.setAdapter(adImagenes);
+            alAmigosCopy.addAll(alAmigos);
+            //adAmigos.notifyDataSetChanged();
+            registerForContextMenu(lts);
+
+        }else {
+            Toast.makeText(this, "NO hay datos que mostrar",Toast.LENGTH_LONG).show();
+        }
+        }catch (Exception ex){
+            Toast.makeText(this,"Error al mostrar datos amigos: "+ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
     void buscarAmigos(){
