@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     BD db_agenda;
     String accion="nuevo";
     String id="";
-
+String stock;
     String rev="";
     String idUnico;
     Button btn;
@@ -102,6 +102,9 @@ public class MainActivity extends AppCompatActivity {
                 urlCompletaImg = jsonObject.getString("urlFoto");
                 Bitmap bitmap = BitmapFactory.decodeFile(urlCompletaImg);
                 img.setImageBitmap(bitmap);
+
+                temp = findViewById(R.id.txtstock);
+                temp.setText(jsonObject.getString("stock"));
             }else {
                 idUnico= utl.generarIdUnico();
             }
@@ -124,6 +127,9 @@ public class MainActivity extends AppCompatActivity {
             temp = (TextView) findViewById(R.id.txtemail);
             String email = temp.getText().toString();
 
+            temp = (TextView) findViewById(R.id.txtstock);
+            String stock = temp.getText().toString();
+
             //guadar datos en server
             JSONObject datosAmigos = new JSONObject();
             if (accion.equals("modificar") && id.length()>0 && rev.length()>0){
@@ -137,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
             datosAmigos.put("telefono",telefono);
             datosAmigos.put("email",email);
             datosAmigos.put("urlFoto",urlCompletaImg);
+            datosAmigos.put("stock",stock);
 
             enviarDatosServidor objGuardarDatosServidor= new enviarDatosServidor(getApplicationContext());
             String msg= objGuardarDatosServidor.execute(datosAmigos.toString()).get();
@@ -150,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             db_agenda = new BD(MainActivity.this, "",null,1);
-            String result = db_agenda.administrar_agenda(id,rev,idUnico, nombre, direccion, telefono, email, urlCompletaImg, accion);
+            String result = db_agenda.administrar_agenda(id,rev,idUnico, nombre, direccion, telefono, email, stock,urlCompletaImg, accion);
             msg = result;
             if( result.equals("ok") ){
                 msg = "Registro guardado con exito";

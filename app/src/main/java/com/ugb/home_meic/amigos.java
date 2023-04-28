@@ -9,7 +9,8 @@ public class amigos {
     String telefono;
     String email;
     String urlImg;
-    public amigos(String id,String rev, String idUnico, String nombre, String direccion, String telefono, String email, String urlImg){
+    String stock;
+    public amigos(String id,String rev, String idUnico, String nombre, String direccion, String telefono, String email, String urlImg, String stock){
         this.id = id;
         this.rev = rev;
         this.idUnico = idUnico;
@@ -18,6 +19,7 @@ public class amigos {
         this.telefono = telefono;
         this.email = email;
         this.urlImg = urlImg;
+        this.stock = stock;
     }
 
     public String getId() {

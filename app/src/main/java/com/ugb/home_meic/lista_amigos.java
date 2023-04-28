@@ -125,7 +125,7 @@ public class lista_amigos extends AppCompatActivity {
             confirmacion.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    db_agenda.administrar_agenda("", "", cAMigos.getString(2), "", "","","","","eliminar");
+                    db_agenda.administrar_agenda("", "", cAMigos.getString(2), "", "","","","","eliminar","");
                     obtenerDatosAmigos();
                     dialogInterface.dismiss();
                 }
@@ -147,33 +147,7 @@ public class lista_amigos extends AppCompatActivity {
 
             db_agenda = new BD(lista_amigos.this, "", null, 1);
             cAMigos = db_agenda.consultar_agenda();
-           /* if(cAMigos.moveToFirst()){
 
-                /*final ArrayAdapter<String> adAmigos = new ArrayAdapter<String>(lista_amigos.this,
-                        android.R.layout.simple_expandable_list_item_1, alAmigos);
-                lts.setAdapter(adAmigos);*/
-                /*datosJSON = new JSONArray();
-
-                do{
-                    //alAmigos.add(cAMigos.getString(1));//1 es el nombre del amigo, pues 0 es el idAmigo.
-                    jsonObject= new JSONObject();
-                    JSONObject jsonObjectvalue= new JSONObject();
-                    jsonObject.put("_id",cAMigos.getString(0));
-                    jsonObject.put("_rev",cAMigos.getString(0));
-                    jsonObject.put("nombre",cAMigos.getString(1));
-                    jsonObject.put("direccion",cAMigos.getString(2));
-                    jsonObject.put("telefono",cAMigos.getString(3));
-                    jsonObject.put("email",cAMigos.getString(4));
-                    jsonObject.put("urlFoto",cAMigos.getString(5));
-                    jsonObjectvalue.put("value",jsonObject);
-
-                    datosJSON.put(jsonObjectvalue);
-
-                }while(cAMigos.moveToNext());
-
-                mostrarDatosAmigos();
-
-            }else{ */
 
 
                 ObtenerDatosAmigosServer();
@@ -219,7 +193,8 @@ public class lista_amigos extends AppCompatActivity {
                        misDatosJSONObject.getString("direcccion"),
                        misDatosJSONObject.getString("telefono"),
                        misDatosJSONObject.getString("email"),
-                       misDatosJSONObject.getString("urlFoto")
+                       misDatosJSONObject.getString("urlFoto"),
+                       misDatosJSONObject.getString("stock")
                 );
                 alAmigos.add(misAmigos);
             }
