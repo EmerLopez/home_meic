@@ -86,4 +86,12 @@ public class amigos {
     public void setUrlImg(String urlImg) {
         this.urlImg = urlImg;
     }
+
+    public String getStock() {
+        return stock;
+    }
+
+    public void setStock(String stock) {
+        this.stock = stock;
+    }
 }
