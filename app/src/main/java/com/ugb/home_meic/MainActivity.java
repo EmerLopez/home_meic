@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                 rev = respJSON.getString("rev");
 
             }else {
-                msg= "NO fue posible guadar en el servidor el amigo: "+ msg;
+                msg= "NO fue posible guadar en el servidor el producto: "+ msg;
             }
 
             db_agenda = new BD(MainActivity.this, "",null,1);
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
 
             Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
         }catch (Exception e){
-            //Toast.makeText(this, "Error en guardar agenda: "+ e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error en guardar producto: "+ e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
     void regresarListaAmigos(){
