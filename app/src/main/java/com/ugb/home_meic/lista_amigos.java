@@ -180,7 +180,7 @@ public class lista_amigos extends AppCompatActivity {
                //Toast.makeText(this, "Sincronizando con el servidor", Toast.LENGTH_SHORT).show();
             //}
         }catch (Exception e){
-            Toast.makeText(this, "Error al obtener amigos: "+ e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Error al obtener producto: "+ e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
     void ObtenerDatosAmigosServer(){
@@ -233,7 +233,7 @@ public class lista_amigos extends AppCompatActivity {
             Toast.makeText(this, "NO hay datos que mostrar",Toast.LENGTH_LONG).show();
         }
         }catch (Exception ex){
-            Toast.makeText(this,"Error al mostrar datos amigos: "+ex.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Error al mostrar datos producto: "+ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
     void buscarAmigos(){
@@ -269,7 +269,7 @@ public class lista_amigos extends AppCompatActivity {
                         lts.setAdapter(adImagenes);
                     }
                 }catch (Exception e){
-                    Toast.makeText(lista_amigos.this, "Error al buscar amigos: "+ e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(lista_amigos.this, "Error al buscar producto: "+ e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
