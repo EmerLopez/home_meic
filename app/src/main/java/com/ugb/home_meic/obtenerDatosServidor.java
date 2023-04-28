@@ -43,7 +43,7 @@ public class obtenerDatosServidor extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String s) {
-
+        /*
         try {
             jsonObject = new JSONObject(s);
             datosJSON = jsonObject.getJSONArray("rows");
@@ -51,6 +51,8 @@ public class obtenerDatosServidor extends AsyncTask<String, String, String> {
         } catch (Exception e) {
 
         }
+
+         */
 
     }
 

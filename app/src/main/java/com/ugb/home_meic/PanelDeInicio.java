@@ -86,7 +86,7 @@ public class PanelDeInicio extends AppCompatActivity implements NavigationView.O
         categoriasBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PanelDeInicio.this, MainActivity.class);
+                Intent intent = new Intent(PanelDeInicio.this, lista_amigos.class);
                 Pair[] pairs = new Pair[1];
 
 
@@ -101,7 +101,7 @@ public class PanelDeInicio extends AppCompatActivity implements NavigationView.O
 
             }
         });
-
+        /*
         eletroBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,11 +121,14 @@ public class PanelDeInicio extends AppCompatActivity implements NavigationView.O
             }
         });
 
+         */
+        /*
         mueblesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PanelDeInicio.this, lista_amigos.class);
                 Pair[] pairs = new Pair[1];
+
 
 
                 pairs[0] = new Pair<View, String>(holaTexto, "logo_texto2");
@@ -140,6 +143,9 @@ public class PanelDeInicio extends AppCompatActivity implements NavigationView.O
             }
         });
 
+         */
+
+        /*
         audioBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,6 +164,10 @@ public class PanelDeInicio extends AppCompatActivity implements NavigationView.O
 
             }
         });
+
+         */
+
+        /*
 
         tecnologiaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,7 +188,10 @@ public class PanelDeInicio extends AppCompatActivity implements NavigationView.O
             }
         });
 
+         */
+        /*
         btnCarrito.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PanelDeInicio.this, MainActivity.class);
@@ -196,6 +209,9 @@ public class PanelDeInicio extends AppCompatActivity implements NavigationView.O
 
             }
         });
+
+         */
+
 
     }
 
@@ -266,10 +282,10 @@ public class PanelDeInicio extends AppCompatActivity implements NavigationView.O
         categoriesRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         ArrayList<CategoriesHelperClass> mostViewedLocations = new ArrayList<>();
-        mostViewedLocations.add(new CategoriesHelperClass(R.drawable.fiesta, "."));
-        mostViewedLocations.add(new CategoriesHelperClass(R.drawable.venta1, "."));
-        mostViewedLocations.add(new CategoriesHelperClass(R.drawable.venta2, "."));
-        mostViewedLocations.add(new CategoriesHelperClass(R.drawable.venta3, "."));
+        //mostViewedLocations.add(new CategoriesHelperClass(R.drawable.fiesta, "."));
+        //mostViewedLocations.add(new CategoriesHelperClass(R.drawable.venta1, "."));
+       // mostViewedLocations.add(new CategoriesHelperClass(R.drawable.venta2, "."));
+        //mostViewedLocations.add(new CategoriesHelperClass(R.drawable.venta3, "."));
 
         adapter = new CategoriesAdapter(mostViewedLocations);
         categoriesRecycler.setAdapter(adapter);

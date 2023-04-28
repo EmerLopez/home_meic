@@ -1,16 +1,18 @@
 package com.ugb.home_meic;
 
 public class amigos {
-    String idAmigo;
+    String id;
     String rev;
+    String idUnico;
     String nombre;
     String direccion;
     String telefono;
     String email;
     String urlImg;
-    public amigos(String idAmigo,String rev, String nombre, String direccion, String telefono, String email){
-        this.idAmigo = idAmigo;
+    public amigos(String id,String rev, String idUnico, String nombre, String direccion, String telefono, String email, String urlImg){
+        this.id = id;
         this.rev = rev;
+        this.idUnico = idUnico;
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
@@ -18,8 +20,11 @@ public class amigos {
         this.urlImg = urlImg;
     }
 
-    public String getIdAmigo() {
-        return idAmigo;
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getRev() {
@@ -30,9 +35,15 @@ public class amigos {
         this.rev = rev;
     }
 
-    public void setIdAmigo(String idAmigo) {
-        this.idAmigo = idAmigo;
+    public String getIdUnico() {
+        return idUnico;
     }
+
+    public void setIdUnico(String idUnico) {
+        this.idUnico = idUnico;
+    }
+
+
 
     public String getNombre() {
         return nombre;

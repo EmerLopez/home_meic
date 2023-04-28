@@ -32,17 +32,21 @@ public class MainActivity extends AppCompatActivity {
     BD db_agenda;
     String accion="nuevo";
     String id="";
+
     String rev="";
+    String idUnico;
     Button btn;
     TextView temp;
     FloatingActionButton fab;
     ImageView img;
     String urlCompletaImg="";
     Intent tomarFotoIntent;
+    utilidades utl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        utl = new utilidades();
 
         btn = findViewById(R.id.btnGuardar);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -72,26 +76,36 @@ public class MainActivity extends AppCompatActivity {
             Bundle parametros = getIntent().getExtras();
             accion = parametros.getString("accion");
             if (accion.equals("modificar")) {
-                String amigos[] = parametros.getStringArray("amigos");
+               /* String amigos[] = parametros.getStringArray("amigos");
                 id = amigos[0];
                 rev = amigos[1];
+                idUnico= json
+
+                */
+                JSONObject jsonObject= new JSONObject(parametros.getString("amigos")).getJSONObject("value");
+                id = jsonObject.getString("_id");
+                rev = jsonObject.getString("_rev");
+                idUnico = jsonObject.getString("idUnico");
 
                 temp = findViewById(R.id.txtnombre);
-                temp.setText(amigos[2]);
+                temp.setText(jsonObject.getString("nombre"));
 
                 temp = findViewById(R.id.txtdireccion);
-                temp.setText(amigos[3]);
+                temp.setText(jsonObject.getString("direccion"));
 
                 temp = findViewById(R.id.txtTelefono);
-                temp.setText(amigos[4]);
+                temp.setText(jsonObject.getString("telefono"));
 
                 temp = findViewById(R.id.txtemail);
-                temp.setText(amigos[5]);
+                temp.setText(jsonObject.getString("email"));
 
-                urlCompletaImg = amigos[6];
+                urlCompletaImg = jsonObject.getString("urlFoto");
                 Bitmap bitmap = BitmapFactory.decodeFile(urlCompletaImg);
                 img.setImageBitmap(bitmap);
+            }else {
+                idUnico= utl.generarIdUnico();
             }
+
         }catch (Exception ex){
             Toast.makeText(this, "Error al mostrar los datos: "+ ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -112,10 +126,12 @@ public class MainActivity extends AppCompatActivity {
 
             //guadar datos en server
             JSONObject datosAmigos = new JSONObject();
-            if (accion.equals("modificar")){
+            if (accion.equals("modificar") && id.length()>0 && rev.length()>0){
                 datosAmigos.put("_id",id);
-                datosAmigos.put("_rev",id);
+                datosAmigos.put("_rev",rev);
             }
+
+            datosAmigos.put("idUnico",idUnico);
             datosAmigos.put("nombre",nombre);
             datosAmigos.put("direccion",direccion);
             datosAmigos.put("telefono",telefono);
@@ -124,9 +140,17 @@ public class MainActivity extends AppCompatActivity {
 
             enviarDatosServidor objGuardarDatosServidor= new enviarDatosServidor(getApplicationContext());
             String msg= objGuardarDatosServidor.execute(datosAmigos.toString()).get();
+            JSONObject respJSON = new JSONObject(msg);
+            if (respJSON.getBoolean("ok")){
+                id = respJSON.getString("id");
+                rev = respJSON.getString("rev");
+
+            }else {
+                msg= "NO fue posible guadar en el servidor el amigo: "+ msg;
+            }
 
             db_agenda = new BD(MainActivity.this, "",null,1);
-            String result = db_agenda.administrar_agenda(id, nombre, direccion, telefono, email, urlCompletaImg, accion);
+            String result = db_agenda.administrar_agenda(id,rev,idUnico, nombre, direccion, telefono, email, urlCompletaImg, accion);
             msg = result;
             if( result.equals("ok") ){
                 msg = "Registro guardado con exito";
@@ -136,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
 
             Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
         }catch (Exception e){
-            Toast.makeText(this, "Error en guardar agenda: "+ e.getMessage(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Error en guardar agenda: "+ e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
     void regresarListaAmigos(){
