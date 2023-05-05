@@ -32,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
     BD db_agenda;
     String accion="nuevo";
     String id="";
-String stock;
+
+    String stock;
     String rev="";
     String idUnico;
     Button btn;
@@ -42,6 +43,8 @@ String stock;
     String urlCompletaImg="";
     Intent tomarFotoIntent;
     utilidades utl;
+
+    detectarInternet di;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,7 +147,7 @@ String stock;
             datosAmigos.put("email",email);
             datosAmigos.put("urlFoto",urlCompletaImg);
             datosAmigos.put("stock",stock);
-
+            /*
             enviarDatosServidor objGuardarDatosServidor= new enviarDatosServidor(getApplicationContext());
             String msg= objGuardarDatosServidor.execute(datosAmigos.toString()).get();
             JSONObject respJSON = new JSONObject(msg);
@@ -156,8 +159,37 @@ String stock;
                 msg= "NO fue posible guadar en el servidor el producto: "+ msg;
             }
 
+             */
+            String msg = "", actualizado = "no";
+            /*
             db_agenda = new BD(MainActivity.this, "",null,1);
-            String result = db_agenda.administrar_agenda(id,rev,idUnico, nombre, direccion, telefono, email, stock,urlCompletaImg, accion);
+            String result = db_agenda.administrar_agenda(id,rev,idUnico, nombre, direccion, telefono, email, urlCompletaImg,stock, accion, actualizado);
+            msg = result;
+            if( result.equals("ok") ){
+                msg = "Registro guardado con exito";
+                //regresarListaAmigos();
+            }
+
+             */
+
+
+
+            di = new detectarInternet(getApplicationContext());
+            if( di.hayConexionInternet() ) {
+                enviarDatosServidor objGuardarDatosServidor = new enviarDatosServidor(getApplicationContext());
+                msg = objGuardarDatosServidor.execute(datosAmigos.toString()).get();
+                JSONObject respJSON = new JSONObject(msg);
+                if (respJSON.getBoolean("ok")) {
+                    id = respJSON.getString("id");
+                    rev = respJSON.getString("rev");
+                    actualizado = "si";
+                } else {
+                    msg = "No fue pisible guardar en el servidor el producto: " + msg;
+                }
+            }
+
+            db_agenda = new BD(MainActivity.this, "",null,1);
+            String result = db_agenda.administrar_agenda(id,rev,idUnico, nombre, direccion, telefono, email, urlCompletaImg,stock, accion, actualizado);
             msg = result;
             if( result.equals("ok") ){
                 msg = "Registro guardado con exito";
@@ -165,9 +197,12 @@ String stock;
             }
 
 
+
+            //regresarListaAmigos();
             Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
         }catch (Exception e){
             Toast.makeText(this, "Error en guardar producto: "+ e.getMessage(), Toast.LENGTH_SHORT).show();
+            //regresarListaAmigos();
         }
     }
     void regresarListaAmigos(){

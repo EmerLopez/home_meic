@@ -13,8 +13,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class obtenerDatosServidor extends AsyncTask<String, String, String> {
-    JSONObject jsonObject;
-    JSONArray datosJSON;
+
     HttpURLConnection httpURLConnection;
 
 

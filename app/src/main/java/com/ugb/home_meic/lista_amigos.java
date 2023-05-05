@@ -45,11 +45,13 @@ public class lista_amigos extends AppCompatActivity {
     ProgressDialog progreso; //barra de progreso
     obtenerDatosServidor datosServidor;
     int posicion = 0;
+
+    detectarInternet di;
     protected void onCreate(Bundle instance){
         super.onCreate(instance);
         setContentView(R.layout.lista_amigos);
-        obtenerDatosAmigos();
-        buscarAmigos();
+        //obtenerDatosAmigos();
+        //buscarAmigos();
         btn = findViewById(R.id.btnAgregarAmigos);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +60,65 @@ public class lista_amigos extends AppCompatActivity {
                 abrirAgregarAmigos(parametros);
             }
         });
+        db_agenda = new BD(lista_amigos.this, "", null, 1);
+
+        try {
+            di = new detectarInternet(getApplicationContext());
+            if (di.hayConexionInternet()) {
+                ObtenerDatosAmigosServer();
+                sincronizar();
+            } else {
+                obtenerDatosAmigos();//offline
+            }
+            buscarAmigos();
+        }catch (Exception e){
+            Log.d("OBTENERBD: ", "DATA: "+ e.getMessage());
+            Toast.makeText(this, "Error al ontener datos de las bases de datos... "+ e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+    private void sincronizar(){
+        cAMigos = db_agenda.pendienteSincronizar();
+        if(cAMigos.moveToFirst()){
+            jsonObject = new JSONObject();
+            try{
+                Toast.makeText(this, "Sincronizando...", Toast.LENGTH_SHORT).show();
+                do{
+                    if( cAMigos.getString(0).length()>0 && cAMigos.getString(1).length()>1 ){
+                        jsonObject.put("_id", cAMigos.getString(0));
+                        jsonObject.put("_rev", cAMigos.getString(1));
+                    }
+                    jsonObject.put("idUnico", cAMigos.getString(2));
+                    if( cAMigos.getString(9).equals("no") ) { //actualizado
+                        jsonObject.put("nombre", cAMigos.getString(3));
+                        jsonObject.put("direccion", cAMigos.getString(4));
+                        jsonObject.put("telefono", cAMigos.getString(5));
+                        jsonObject.put("email", cAMigos.getString(6));
+                        jsonObject.put("urlFoto", cAMigos.getString(7));
+                        jsonObject.put("stock", cAMigos.getString(8));
+                        jsonObject.put("actualizado", "si");
+
+                        enviarDatosServidor objGuardarDatosServidor = new enviarDatosServidor(getApplicationContext());
+                        String msg = objGuardarDatosServidor.execute(jsonObject.toString()).get();
+                        JSONObject respJSON = new JSONObject(msg);
+                        if (respJSON.getBoolean("ok")) {
+                            jsonObject.put("_id", respJSON.getString("id"));
+                            jsonObject.put("_rev", respJSON.getString("rev"));
+
+                            String result = db_agenda.administrar_agenda(
+                                    jsonObject.getString("_id"), jsonObject.getString("_rev"), jsonObject.getString("idUnico"),
+                                    jsonObject.getString("nombre"), jsonObject.getString("direccion"), jsonObject.getString("telefono"),
+                                    jsonObject.getString("email"), jsonObject.getString("urlFoto"), jsonObject.getString("stock"),"modificar","si");
+                        } else {
+                            msg = "No fue pisible guardar en el servidor el amigo: " + msg;
+                        }
+                    }
+                }while (cAMigos.moveToNext());
+                Toast.makeText(this, "Sincronizacion Completa", Toast.LENGTH_SHORT).show();
+                ObtenerDatosAmigosServer();
+            }catch (Exception e){
+                Toast.makeText(this, "Error al inentar sincronizar los registro pendientes "+ e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }
     }
     public void abrirAgregarAmigos(Bundle parametros){
         Intent iAgregarAmigos = new Intent(lista_amigos.this, MainActivity.class);
@@ -125,7 +186,11 @@ public class lista_amigos extends AppCompatActivity {
             confirmacion.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    db_agenda.administrar_agenda("", "", cAMigos.getString(2), "", "","","","","eliminar","");
+                    try {
+                        db_agenda.administrar_agenda("", "", datosJSON.getJSONObject(posicion).getJSONObject("value").getString("idUnico"), "", "","","","","","eliminar","eliminar");
+                    } catch (Exception e) {
+                        Toast.makeText(lista_amigos.this, "Error al eliminar: "+ e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                     obtenerDatosAmigos();
                     dialogInterface.dismiss();
                 }
@@ -143,18 +208,36 @@ public class lista_amigos extends AppCompatActivity {
     }
     public void obtenerDatosAmigos(){
         try {
-
-
-            db_agenda = new BD(lista_amigos.this, "", null, 1);
             cAMigos = db_agenda.consultar_agenda();
+            if(cAMigos.moveToFirst()){
+                    /*final ArrayAdapter<String> adAmigos = new ArrayAdapter<String>(lista_amigos.this,
+                            android.R.layout.simple_expandable_list_item_1, alAmigos);
+                    lts.setAdapter(adAmigos);*/
+                datosJSON = new JSONArray();
+                do{
+                    //alAmigos.add(cAMigos.getString(1));//1 es el nombre del amigo, pues 0 es el idAmigo.
+                    jsonObject = new JSONObject();
+                    JSONObject jsonObjectValue = new JSONObject();
 
+                    jsonObject.put("_id", cAMigos.getString(0));
+                    jsonObject.put("_rev", cAMigos.getString(1));
+                    jsonObject.put("idUnico", cAMigos.getString(2));
+                    jsonObject.put("nombre", cAMigos.getString(3));
+                    jsonObject.put("direccion", cAMigos.getString(4));
+                    jsonObject.put("telefono", cAMigos.getString(5));
+                    jsonObject.put("email", cAMigos.getString(6));
+                    jsonObject.put("urlFoto", cAMigos.getString(7));
+                    jsonObject.put("stock", cAMigos.getString(8));
+                    jsonObjectValue.put("value", jsonObject);
 
-
-                ObtenerDatosAmigosServer();
-               //Toast.makeText(this, "Sincronizando con el servidor", Toast.LENGTH_SHORT).show();
-            //}
+                    datosJSON.put(jsonObjectValue);
+                }while(cAMigos.moveToNext());
+                mostrarDatosAmigos();
+            }else{
+                Toast.makeText(this, "NO hay datos que mostrar", Toast.LENGTH_SHORT).show();
+            }
         }catch (Exception e){
-            Toast.makeText(this, "Error al obtener producto: "+ e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Error al obtener amigos: "+ e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
     void ObtenerDatosAmigosServer(){
