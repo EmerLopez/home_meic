@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
     BD db_agenda;
     String accion="nuevo";
     String id="";
-
-    String stock;
     String rev="";
     String idUnico;
     Button btn;
@@ -43,14 +41,13 @@ public class MainActivity extends AppCompatActivity {
     String urlCompletaImg="";
     Intent tomarFotoIntent;
     utilidades utl;
-
     detectarInternet di;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        utl = new utilidades();
 
+        utl = new utilidades();
         btn = findViewById(R.id.btnGuardar);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,16 +76,12 @@ public class MainActivity extends AppCompatActivity {
             Bundle parametros = getIntent().getExtras();
             accion = parametros.getString("accion");
             if (accion.equals("modificar")) {
-               /* String amigos[] = parametros.getStringArray("amigos");
-                id = amigos[0];
-                rev = amigos[1];
-                idUnico= json
+                //String amigos[] = parametros.getStringArray("amigos");
+                JSONObject jsonObject = new JSONObject(parametros.getString("amigos")).getJSONObject("value");
 
-                */
-                JSONObject jsonObject= new JSONObject(parametros.getString("amigos")).getJSONObject("value");
                 id = jsonObject.getString("_id");
                 rev = jsonObject.getString("_rev");
-                idUnico = jsonObject.getString("idUnico");
+                idUnico = jsonObject.getString(("idUnico"));
 
                 temp = findViewById(R.id.txtnombre);
                 temp.setText(jsonObject.getString("nombre"));
@@ -105,13 +98,9 @@ public class MainActivity extends AppCompatActivity {
                 urlCompletaImg = jsonObject.getString("urlFoto");
                 Bitmap bitmap = BitmapFactory.decodeFile(urlCompletaImg);
                 img.setImageBitmap(bitmap);
-
-                temp = findViewById(R.id.txtstock);
-                temp.setText(jsonObject.getString("stock"));
-            }else {
-                idUnico= utl.generarIdUnico();
+            }else{
+                idUnico = utl.generarIdUnico();
             }
-
         }catch (Exception ex){
             Toast.makeText(this, "Error al mostrar los datos: "+ ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -130,50 +119,20 @@ public class MainActivity extends AppCompatActivity {
             temp = (TextView) findViewById(R.id.txtemail);
             String email = temp.getText().toString();
 
-            temp = (TextView) findViewById(R.id.txtstock);
-            String stock = temp.getText().toString();
-
-            //guadar datos en server
+            //guardar datos en servidor
             JSONObject datosAmigos = new JSONObject();
-            if (accion.equals("modificar") && id.length()>0 && rev.length()>0){
-                datosAmigos.put("_id",id);
-                datosAmigos.put("_rev",rev);
+            if( accion.equals("modificar") && id.length()>0 && rev.length()>0 ){
+                datosAmigos.put("_id", id);
+                datosAmigos.put("_rev", rev);
             }
+            datosAmigos.put("idUnico", idUnico);
+            datosAmigos.put("nombre", nombre);
+            datosAmigos.put("direccion", direccion);
+            datosAmigos.put("telefono", telefono);
+            datosAmigos.put("email", email);
+            datosAmigos.put("urlFoto", urlCompletaImg);
 
-            datosAmigos.put("idUnico",idUnico);
-            datosAmigos.put("nombre",nombre);
-            datosAmigos.put("direccion",direccion);
-            datosAmigos.put("telefono",telefono);
-            datosAmigos.put("email",email);
-            datosAmigos.put("urlFoto",urlCompletaImg);
-            datosAmigos.put("stock",stock);
-            /*
-            enviarDatosServidor objGuardarDatosServidor= new enviarDatosServidor(getApplicationContext());
-            String msg= objGuardarDatosServidor.execute(datosAmigos.toString()).get();
-            JSONObject respJSON = new JSONObject(msg);
-            if (respJSON.getBoolean("ok")){
-                id = respJSON.getString("id");
-                rev = respJSON.getString("rev");
-
-            }else {
-                msg= "NO fue posible guadar en el servidor el producto: "+ msg;
-            }
-
-             */
             String msg = "", actualizado = "no";
-            /*
-            db_agenda = new BD(MainActivity.this, "",null,1);
-            String result = db_agenda.administrar_agenda(id,rev,idUnico, nombre, direccion, telefono, email, urlCompletaImg,stock, accion, actualizado);
-            msg = result;
-            if( result.equals("ok") ){
-                msg = "Registro guardado con exito";
-                //regresarListaAmigos();
-            }
-
-             */
-
-
-
             di = new detectarInternet(getApplicationContext());
             if( di.hayConexionInternet() ) {
                 enviarDatosServidor objGuardarDatosServidor = new enviarDatosServidor(getApplicationContext());
@@ -187,22 +146,16 @@ public class MainActivity extends AppCompatActivity {
                     msg = "No fue pisible guardar en el servidor el producto: " + msg;
                 }
             }
-
             db_agenda = new BD(MainActivity.this, "",null,1);
-            String result = db_agenda.administrar_agenda(id,rev,idUnico, nombre, direccion, telefono, email, urlCompletaImg,stock, accion, actualizado);
+            String result = db_agenda.administrar_agenda(id, rev, idUnico, nombre, direccion, telefono, email, urlCompletaImg, accion, actualizado);
             msg = result;
             if( result.equals("ok") ){
                 msg = "Registro guardado con exito";
                 regresarListaAmigos();
             }
-
-
-
-            //regresarListaAmigos();
             Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
         }catch (Exception e){
             Toast.makeText(this, "Error en guardar producto: "+ e.getMessage(), Toast.LENGTH_SHORT).show();
-            //regresarListaAmigos();
         }
     }
     void regresarListaAmigos(){

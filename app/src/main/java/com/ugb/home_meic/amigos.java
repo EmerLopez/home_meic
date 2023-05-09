@@ -9,8 +9,7 @@ public class amigos {
     String telefono;
     String email;
     String urlImg;
-    String stock;
-    public amigos(String id,String rev, String idUnico, String nombre, String direccion, String telefono, String email, String urlImg, String stock){
+    public amigos(String id, String rev, String idUnico, String nombre, String direccion, String telefono, String email, String urlImg){
         this.id = id;
         this.rev = rev;
         this.idUnico = idUnico;
@@ -19,12 +18,12 @@ public class amigos {
         this.telefono = telefono;
         this.email = email;
         this.urlImg = urlImg;
-        this.stock = stock;
     }
 
     public String getId() {
         return id;
     }
+
     public void setId(String id) {
         this.id = id;
     }
@@ -44,8 +43,6 @@ public class amigos {
     public void setIdUnico(String idUnico) {
         this.idUnico = idUnico;
     }
-
-
 
     public String getNombre() {
         return nombre;
@@ -85,13 +82,5 @@ public class amigos {
 
     public void setUrlImg(String urlImg) {
         this.urlImg = urlImg;
-    }
-
-    public String getStock() {
-        return stock;
-    }
-
-    public void setStock(String stock) {
-        this.stock = stock;
     }
 }

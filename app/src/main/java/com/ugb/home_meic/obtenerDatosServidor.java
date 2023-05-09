@@ -13,14 +13,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class obtenerDatosServidor extends AsyncTask<String, String, String> {
-
     HttpURLConnection httpURLConnection;
-
-
     @Override
     protected String doInBackground(String... voids) {
         StringBuilder result = new StringBuilder();
-        try {
+        try{
             //conexion con el servidor
             URL url = new URL(utilidades.url_consulta);
             httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -29,12 +26,12 @@ public class obtenerDatosServidor extends AsyncTask<String, String, String> {
             InputStream inputStream = new BufferedInputStream(httpURLConnection.getInputStream());
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ((line= reader.readLine())!=null){
                 result.append(line);
             }
-        } catch (Exception e) {
+        }catch (Exception e){
             //mensaje de error
-        } finally {
+        }finally {
             httpURLConnection.disconnect();
         }
         return result.toString();
@@ -42,17 +39,6 @@ public class obtenerDatosServidor extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String s) {
-        /*
-        try {
-            jsonObject = new JSONObject(s);
-            datosJSON = jsonObject.getJSONArray("rows");
-
-        } catch (Exception e) {
-
-        }
-
-         */
-
+        super.onPostExecute(s);
     }
-
 }
