@@ -10,7 +10,7 @@
     android:padding="20dp">
 
     <ImageView
-        android:id="@+id/ini_logo_imagen"
+        android:id="@+id/ini_logo_imagenR"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:transitionName="logo_imagen1"
@@ -18,21 +18,21 @@
         android:src="@drawable/logo"/>
 
     <TextView
-        android:id="@+id/ini_hola"
+        android:id="@+id/ini_holaR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:transitionName="logo_texto2"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/fredoka_one"
-        android:text="Hola, bienvenido de nuevo"
+        android:text="Hola!"
         android:textColor="@color/black"
         android:textSize="25sp" />
 
     <TextView
-        android:id="@+id/ini_iniciar"
+        android:id="@+id/ini_iniciarR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Iniciar sesión para continuar"
+        android:text="Registrate para continuar"
         android:transitionName="iniciar_logo3"
         android:textSize="16sp"
         android:fontFamily="@font/fredoka_one"/>
@@ -54,10 +54,11 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/lo_correo"
+                android:id="@+id/re_correo"
                 android:layout_width="match_parent"
-                android:hint="Correo"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:hint="Correo"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,23 +71,23 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/lo_contrasena"
-                android:hint="Contraseña"
-                app:passwordToggleEnabled="true"
+                android:id="@+id/re_contrasena"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword"
+                android:hint="Contraseña"
+                app:passwordToggleEnabled="true"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
 
 
         <Button
-            android:id="@+id/lo_continuar"
+            android:id="@+id/re_registrarse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:transitionName="continuar_logo6"
-            android:text="Continuar"
+            android:text="registrarse"
             android:textSize="11sp"
             android:background="#000"
             android:textColor="@color/white"
@@ -105,14 +106,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="¿No tienes cuenta?"
+                android:text="Tengo una cuenta"
                 android:textSize="15dp"
                 android:textStyle="bold"/>
             <TextView
-                android:id="@+id/lo_registrarse"
+                android:id="@+id/re_IniciarS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Registrarse"
+                android:text="Iniciar Sesion"
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:textColor="@color/black"
