@@ -76,7 +76,7 @@ public class IniciarSesion extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             Toast.makeText(IniciarSesion.this, "Inicio de sesion con exito", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(IniciarSesion.this, PanelDeInicio.class);
+                            Intent intent = new Intent(IniciarSesion.this, Menu_principal.class);
                             startActivity(intent);
                             finish();
                         }else {
