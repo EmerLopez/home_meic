@@ -14,7 +14,7 @@
         android:layout_centerInParent="true"
         android:textSize="30sp"
         android:gravity="center"
-        android:text="PANTALLA 1: Aqui podria ir como el perfil del usuario que ha iniciado sesión "
+        android:text="PANTALLA 1"
         android:textColor="@color/black"/>
 
 

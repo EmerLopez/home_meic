@@ -147,34 +147,9 @@ public class MainActivity extends AppCompatActivity {
             datosAmigos.put("email",email);
             datosAmigos.put("urlFoto",urlCompletaImg);
             datosAmigos.put("stock",stock);
-            /*
-            enviarDatosServidor objGuardarDatosServidor= new enviarDatosServidor(getApplicationContext());
-            String msg= objGuardarDatosServidor.execute(datosAmigos.toString()).get();
-            JSONObject respJSON = new JSONObject(msg);
-            if (respJSON.getBoolean("ok")){
-                id = respJSON.getString("id");
-                rev = respJSON.getString("rev");
 
-            }else {
-                msg= "NO fue posible guadar en el servidor el producto: "+ msg;
-            }
-
-             */
             String msg = "", actualizado = "no";
-            /*
-            db_agenda = new BD(MainActivity.this, "",null,1);
-            String result = db_agenda.administrar_agenda(id,rev,idUnico, nombre, direccion, telefono, email, urlCompletaImg,stock, accion, actualizado);
-            msg = result;
-            if( result.equals("ok") ){
-                msg = "Registro guardado con exito";
-                //regresarListaAmigos();
-            }
-
-             */
-
-
-
-            di = new detectarInternet(getApplicationContext());
+          di = new detectarInternet(getApplicationContext());
             if( di.hayConexionInternet() ) {
                 enviarDatosServidor objGuardarDatosServidor = new enviarDatosServidor(getApplicationContext());
                 msg = objGuardarDatosServidor.execute(datosAmigos.toString()).get();
@@ -195,9 +170,6 @@ public class MainActivity extends AppCompatActivity {
                 msg = "Registro guardado con exito";
                 regresarListaAmigos();
             }
-
-
-
             //regresarListaAmigos();
             Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
         }catch (Exception e){

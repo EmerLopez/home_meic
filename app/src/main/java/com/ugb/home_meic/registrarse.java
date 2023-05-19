@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,22 +22,27 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class registrarse extends AppCompatActivity {
-    TextInputEditText editTextEmail, editTextPassword;
-    Button signup;
-    TextView signIn;
+    EditText TextEmail, TextPassword, TextRPassword;
+    Button registrarseR;
+    TextView IsesionR;
+
+    DBHelper DB;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrarse);
 
-        editTextEmail = findViewById(R.id.re_correo);
-        editTextPassword  = findViewById(R.id.re_contrasena);
-        signIn = findViewById(R.id.re_IniciarS);
-        signup = findViewById(R.id.re_registrarse);
+        TextEmail = (EditText) findViewById(R.id.re_correo);
+        TextPassword  = (EditText) findViewById(R.id.re_contrasena);
+        TextRPassword  = (EditText) findViewById(R.id.re_vcontrasena);
+        IsesionR = findViewById(R.id.re_IniciarS);
+        registrarseR = findViewById(R.id.re_registrarse);
+        DB = new DBHelper(this);
 
-        signIn.setOnClickListener(new View.OnClickListener() {
+        IsesionR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(registrarse.this, IniciarSesion.class);
@@ -45,12 +51,19 @@ public class registrarse extends AppCompatActivity {
             }
         });
 
-        signup.setOnClickListener(new View.OnClickListener() {
+        registrarseR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email, password;
+                String email = TextEmail.getText().toString();
+                String password = TextPassword.getText().toString();
+                String repassword = TextRPassword.getText().toString();
+                /*
+                String email, password, repassword;
                 email = String.valueOf(editTextEmail.getText());
                 password = String.valueOf(editTextPassword.getText());
+                repassword = String.valueOf(editTextRPassword.getText());
+
+                 */
 
                 if (TextUtils.isEmpty(email)){
                     Toast.makeText(registrarse.this, "Ingresa un Correo", Toast.LENGTH_SHORT).show();
@@ -60,17 +73,45 @@ public class registrarse extends AppCompatActivity {
                     Toast.makeText(registrarse.this, "Ingresa una contraseña", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful() && password.equals(repassword)){
+                            Boolean checkuser = DB.checkusername(email);
+                            if(checkuser==false) {
+                                Boolean insert = DB.insertData(email, password);
+                                if (insert == true) {
+                                    Toast.makeText(registrarse.this, "Registro con exito", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(getApplicationContext(), IniciarSesion.class);
+                                    startActivity(intent);
+
+                                }
+                            }
+
+                            /*
                             Toast.makeText(registrarse.this, "Registro realizado con exito", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(registrarse.this, IniciarSesion.class);
                             startActivity(intent);
                             finish();
 
+                             */
                         }else {
-                            Toast.makeText(registrarse.this, "Error al registrarse", Toast.LENGTH_SHORT).show();
+                            if(password.equals(repassword)){
+                                Boolean checkuser = DB.checkusername(email);
+                                if(checkuser==false){
+                                    Boolean insert = DB.insertData(email, password);
+                                    if(insert==true){
+                                        Toast.makeText(registrarse.this, "Registro con exito sin conexion", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getApplicationContext(),IniciarSesion.class);
+                                        startActivity(intent);
+                                    }else{
+                                        Toast.makeText(registrarse.this, "Fallo al registrar", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                            }
+
                         }
                     }
                 });

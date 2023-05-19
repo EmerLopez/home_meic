@@ -24,7 +24,7 @@
         android:transitionName="logo_texto2"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/fredoka_one"
-        android:text="Hola, bienvenido de nuevo"
+        android:text="Hola!"
         android:textColor="@color/black"
         android:textSize="25sp" />
 
@@ -53,7 +53,7 @@
 
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
                 android:id="@+id/lo_correo"
                 android:layout_width="match_parent"
                 android:hint="Correo"
@@ -69,7 +69,7 @@
 
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
                 android:id="@+id/lo_contrasena"
                 android:hint="Contraseña"
                 app:passwordToggleEnabled="true"
@@ -86,7 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:transitionName="continuar_logo6"
-            android:text="Continuar"
+            android:text="Iniciar Sesion"
             android:textSize="11sp"
             android:background="#000"
             android:textColor="@color/white"
