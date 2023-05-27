@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn = "navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+
+            android:id="@+id/nav_inicio"
+            android:title="Inicio"
+            android:icon="@drawable/otro_menu_icono"/>
+
+        <item
+            android:id="@+id/nav_buscar"
+            android:title="Buscar"
+            android:icon="@drawable/buscar_icono"/>
+        <item
+
+            android:id="@+id/nav_todas_las_categorias"
+            android:title="Categorias"
+            android:icon="@drawable/categorias_icono"/>
+
+        <item
+            android:id="@+id/nav_sobre_nosotros"
+            android:title="Nosotros"
+            android:icon="@drawable/nosotros_icono"/>
+
+
+    </group>
+
+
+    <item android:title="Categorias">
+
+        <menu>
+
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_muebles"
+                    android:title="Muebles"
+                    android:icon="@drawable/muebles_icono"/>
+                <item
+                    android:id="@+id/nav_electrodomesticos"
+                    android:title="Electrodomesticos"
+                    android:icon="@drawable/electrodomesticos_icono"/>
+
+                <item
+                    android:id="@+id/nav_audio"
+                    android:title="Audio y video"
+                    android:icon="@drawable/sonido_icono"/>
+                <item
+                    android:id="@+id/nav_tecnologia"
+                    android:title="Tecnologia"
+                    android:icon="@drawable/tecnologia_icono"/>
+
+            </group>
+
+        </menu>
+
+    </item>
+
+
+
+    <item android:title="Perfil">
+        <menu>
+
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_login"
+                    android:title="Login"
+                    android:icon="@drawable/abrir_icono"/>
+                <item
+                    android:id="@+id/perfil"
+                    android:title="Perfil"
+                    android:icon="@drawable/perfil_icono"/>
+                <item
+                    android:id="@+id/nav_cerrar_sesion"
+                    android:title="Cerrar sesión"
+                    android:icon="@drawable/cerrar_icono"/>
+
+            </group>
+
+        </menu>
+
+    </item>
+
+
+
+    <item android:title="Compartir">
+        <menu>
+
+            <group android:checkableBehavior="none">
+                <item
+                    android:id="@+id/nav_compartir"
+                    android:title="Compartir"
+                    android:icon="@drawable/compartir_icono"/>
+                <item
+                    android:id="@+id/nav_calificanos"
+                    android:title="Calificanos"
+                    android:icon="@drawable/valorar_icono"/>
+
+            </group>
+
+        </menu>
+
+    </item>
+
+</menu>

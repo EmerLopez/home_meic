@@ -3,6 +3,7 @@ package com.ugb.home_meic;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,21 +26,15 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class IniciarSesion extends AppCompatActivity {
 
-    // VARIABLES
-    /*
-    Button continuar, registrar;
-    ImageView imagen;
-    TextView holaTexto, iniciarTexto;
-    TextInputLayout nombreUsuario, contrasena;
-
-     */
-
     EditText TextEmail, TextPassword;
     Button Isesion;
+
+
     TextView registrarse;
 
     DBHelper DB;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +45,8 @@ public class IniciarSesion extends AppCompatActivity {
         TextPassword  = (EditText) findViewById(R.id.lo_contrasena);
         Isesion = findViewById(R.id.lo_continuar);
         registrarse = findViewById(R.id.lo_registrarse);
+
+
         DB = new DBHelper(this);
 
         registrarse.setOnClickListener(new View.OnClickListener() {
@@ -60,15 +57,11 @@ public class IniciarSesion extends AppCompatActivity {
                 finish();
             }
         });
+
         Isesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*
-                String email, password;
-                email = String.valueOf(editTextEmail.getText());
-                password = String.valueOf(editTextPassword.getText());
 
-                 */
                 String email = TextEmail.getText().toString();
                 String password = TextPassword.getText().toString();
 
@@ -90,13 +83,13 @@ public class IniciarSesion extends AppCompatActivity {
 
                         if (task.isSuccessful() && checkuserpass==true){
                             Toast.makeText(IniciarSesion.this, "Inicio de sesion con exito", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(IniciarSesion.this, Menu_principal.class);
+                            Intent intent = new Intent(IniciarSesion.this, Menu_Cliente.class);
                             startActivity(intent);
                             finish();
                         }else {
                             if(checkuserpass==true){
                                 Toast.makeText(IniciarSesion.this, "Inicio de sesion sin conexion", Toast.LENGTH_SHORT).show();
-                                Intent intent  = new Intent(getApplicationContext(), Menu_principal.class);
+                                Intent intent  = new Intent(getApplicationContext(), Menu_Cliente.class);
                                 startActivity(intent);
                             }else{
                                 Toast.makeText(IniciarSesion.this, "Credenciales invalidas", Toast.LENGTH_SHORT).show();

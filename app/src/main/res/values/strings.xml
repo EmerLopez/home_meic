@@ -50,4 +50,5 @@
     <string name="title_activity_menu_principal">Menu_principal</string>
     <string name="abrir_navegador">Abrir cajón de navegación</string>
     <string name="cerrar_navegador">Cerrar cajón de navegación</string>
+    <string name="title_activity_menu_cliente">Menu_Cliente</string>
 </resources>
