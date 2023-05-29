@@ -1,5 +1,6 @@
 package com.ugb.home_meic;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -59,7 +60,10 @@ public class Menu_Cliente extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.nav_compartir:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Compartir()).commit();
+                Intent intent = new Intent(Menu_Cliente.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Compartir()).commit();
                 break;
 
             case R.id.nav_sobre_nosotros:

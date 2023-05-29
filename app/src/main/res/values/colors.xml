@@ -14,6 +14,7 @@
     <color name="banner_background">#F1E9CE</color>
     <color name="banner_background_light">#56F1E9CE</color>
     <color name="banner_background_icono">#D0FFDD6B</color>
+    <color name="transparente">#00FFFFFF</color>
 
 
     <color name="card1">#D4CBE5</color>
