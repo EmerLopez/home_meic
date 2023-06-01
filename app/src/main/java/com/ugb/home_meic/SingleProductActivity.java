@@ -2,7 +2,9 @@ package com.ugb.home_meic;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +15,8 @@ public class SingleProductActivity extends AppCompatActivity {
     TextView solNombreProducto, solPrecio, solMarca, solDescripcion, solEspecificaciones, solDisponibilidad;
 
     ImageView solImagen;
+    ImageView back;
+    TextView titulo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,19 @@ public class SingleProductActivity extends AppCompatActivity {
         solDescripcion.setText(getIntent().getStringExtra("solDescripcion"));
         solEspecificaciones.setText(getIntent().getStringExtra("solEspecificaciones"));
         solDisponibilidad.setText(getIntent().getStringExtra("solDisponibilidad"));
+
+        back = findViewById(R.id.btn_back);
+        titulo = findViewById(R.id.tv_title_toolbar);
+
+        titulo.setText("");
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SingleProductActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
 
     }

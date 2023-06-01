@@ -67,11 +67,18 @@ public class Menu_Cliente extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.nav_sobre_nosotros:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Nosotros()).commit();
+                Intent intent1 = new Intent(Menu_Cliente.this, crud_users.class);
+                startActivity(intent1);
+                finish();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Nosotros()).commit();
                 break;
 
             case R.id.nav_cerrar_sesion:
+                Intent intent2 = new Intent(Menu_Cliente.this, IniciarSesion.class);
+                startActivity(intent2);
+                finish();
                 Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show();
+
                 break;
         }
 

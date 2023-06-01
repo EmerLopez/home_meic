@@ -57,13 +57,7 @@ public class registrarse extends AppCompatActivity {
                 String email = TextEmail.getText().toString();
                 String password = TextPassword.getText().toString();
                 String repassword = TextRPassword.getText().toString();
-                /*
-                String email, password, repassword;
-                email = String.valueOf(editTextEmail.getText());
-                password = String.valueOf(editTextPassword.getText());
-                repassword = String.valueOf(editTextRPassword.getText());
 
-                 */
 
                 if (TextUtils.isEmpty(email)){
                     Toast.makeText(registrarse.this, "Ingresa un Correo", Toast.LENGTH_SHORT).show();
@@ -74,47 +68,50 @@ public class registrarse extends AppCompatActivity {
                     return;
                 }
 
-                firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+
+                if (password.equals(repassword) && password.length() >= 6 && repassword.length() >= 6){
+                    firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful() && password.equals(repassword)){
-                            Boolean checkuser = DB.checkusername(email);
-                            if(checkuser==false) {
-                                Boolean insert = DB.insertData(email, password);
-                                if (insert == true) {
-                                    Toast.makeText(registrarse.this, "Registro con exito", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getApplicationContext(), IniciarSesion.class);
-                                    startActivity(intent);
 
-                                }
-                            }
 
-                            /*
-                            Toast.makeText(registrarse.this, "Registro realizado con exito", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(registrarse.this, IniciarSesion.class);
-                            startActivity(intent);
-                            finish();
-
-                             */
-                        }else {
-                            if(password.equals(repassword)){
+                            if (task.isSuccessful()){
                                 Boolean checkuser = DB.checkusername(email);
-                                if(checkuser==false){
+                                if(checkuser==false) {
                                     Boolean insert = DB.insertData(email, password);
-                                    if(insert==true){
-                                        Toast.makeText(registrarse.this, "Registro con exito sin conexion", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(getApplicationContext(),IniciarSesion.class);
+                                    if (insert == true) {
+                                        Toast.makeText(registrarse.this, "Registro con exito", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getApplicationContext(), IniciarSesion.class);
                                         startActivity(intent);
-                                    }else{
-                                        Toast.makeText(registrarse.this, "Fallo al registrar", Toast.LENGTH_SHORT).show();
+
                                     }
                                 }
+                                }else {
+                                Boolean checkuser = DB.checkusername(email);
+                                    if (checkuser == false) {
+                                        Boolean insert = DB.insertData(email, password);
+                                        if (insert == true) {
+                                            Toast.makeText(registrarse.this, "Registro con exito sin conexion", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(getApplicationContext(), IniciarSesion.class);
+                                            startActivity(intent);
+                                        } else {
+                                            Toast.makeText(registrarse.this, "Fallo al registrar", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }
+                         }
 
-                            }
+                    });
+                }else {
+                    if (password.equals(repassword)){
+                        Toast.makeText(registrarse.this, "La contraseña debe ser mayor a 6 caracteres", Toast.LENGTH_SHORT).show();
 
-                        }
+                    }else {
+                        Toast.makeText(registrarse.this, "La contraseñas ingresadas son diferentes", Toast.LENGTH_SHORT).show();
                     }
-                });
+
+                }
 
             }
         });

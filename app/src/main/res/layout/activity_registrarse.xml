@@ -67,6 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:transitionName="contrasena_logo5"
+            app:passwordToggleEnabled="true"
 
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -85,6 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:transitionName="nombre_logo4"
+            app:passwordToggleEnabled="true"
 
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             tools:ignore="ExtraText">
@@ -108,7 +110,7 @@
             android:transitionName="continuar_logo6"
             android:text="registrarse"
             android:textSize="11sp"
-            android:background="#000"
+            android:background="@drawable/round_btn"
             android:textColor="@color/white"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="5dp"

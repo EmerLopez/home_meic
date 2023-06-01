@@ -66,6 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:transitionName="contrasena_logo5"
+            app:passwordToggleEnabled="true"
 
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -88,7 +89,8 @@
             android:transitionName="continuar_logo6"
             android:text="Iniciar Sesion"
             android:textSize="11sp"
-            android:background="#000"
+            android:background="@drawable/round_btn"
+
             android:textColor="@color/white"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="5dp"
@@ -118,12 +120,7 @@
                 android:layout_marginLeft="10dp"/>
 
         </LinearLayout>
-
-
-
-
-
-    </LinearLayout>
+</LinearLayout>
 
 
 </LinearLayout>

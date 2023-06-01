@@ -35,6 +35,8 @@ public class UploadProductosActivity extends AppCompatActivity {
     TextView nombreProducto, descripcion, precio, marca, disponibilidad, especificaciones;
     ImageView subirBtn, imagenPructo;
     Button enviar;
+    ImageView back;
+    TextView titulo;
 
     private FirebaseDatabase database;
     private FirebaseStorage firebaseStorage;
@@ -73,6 +75,21 @@ public class UploadProductosActivity extends AppCompatActivity {
         dialog.setCancelable(false);
         dialog.setTitle("Cargando producto");
         dialog.setCanceledOnTouchOutside(false);
+
+        back = findViewById(R.id.btn_back);
+        titulo = findViewById(R.id.tv_title_toolbar);
+
+        titulo.setText("Agregar Producto");
+
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UploadProductosActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         subirBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,6 +136,9 @@ public class UploadProductosActivity extends AppCompatActivity {
                                                 Toast.makeText(UploadProductosActivity.this, "Producto enviado", Toast.LENGTH_SHORT).show();
 
                                                 dialog.dismiss();
+                                                Intent intent = new Intent(UploadProductosActivity.this, MainActivity.class);
+                                                startActivity(intent);
+                                                finish();
 
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {

@@ -34,7 +34,7 @@ public class IniciarSesion extends AppCompatActivity {
 
     DBHelper DB;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    @SuppressLint("WrongViewCast")
+   // @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +81,7 @@ public class IniciarSesion extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
 
-                        if (task.isSuccessful() && checkuserpass==true){
+                        if (task.isSuccessful()){ //&& checkuserpass==true){
                             Toast.makeText(IniciarSesion.this, "Inicio de sesion con exito", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(IniciarSesion.this, Menu_Cliente.class);
                             startActivity(intent);
