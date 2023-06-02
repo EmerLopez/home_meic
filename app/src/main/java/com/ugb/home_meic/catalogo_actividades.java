@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,67 +20,39 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
-
-    Button upload;
+public class catalogo_actividades extends AppCompatActivity {
     RecyclerView recyclerView;
-    ArrayList<ProjectModel> recycleList;
-
+    ArrayList<ProjectModelClient> recycleList;
+    TextView titulo;
     FirebaseDatabase firebaseDatabase;
     ImageView back;
-    ImageView actualizar;
 
-
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_catalogo_actividades);
+        recyclerView = findViewById(R.id.recyclerView);
+        recycleList = new ArrayList<>();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
+        titulo = findViewById(R.id.tv_title_toolbar);
+
+        titulo.setText("Productos disponibles");
 
         back = findViewById(R.id.btn_back);
-        actualizar = findViewById(R.id.icontoolbar);
-
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Menu_principal.class);
+                Intent intent = new Intent(catalogo_actividades.this, Menu_principal.class);
                 startActivity(intent);
                 finish();
             }
         });
 
-        upload = findViewById(R.id.upload);
-        recyclerView = findViewById(R.id.recyclerView);
-        recycleList = new ArrayList<>();
-        firebaseDatabase = FirebaseDatabase.getInstance();
 
-
-
-        lisproductos();
-
-
-
-        upload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, UploadProductosActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        actualizar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                lisproductos();
-            }
-        });
-
-    }
-
-    private void lisproductos(){
-        //recyclerView.cle();
         recycleList.clear();
-        ProjectAdapter recyclerAdapter = new ProjectAdapter(recycleList, getApplicationContext());
+        ProjectAdapterClient recyclerAdapter = new ProjectAdapterClient(recycleList, getApplicationContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
@@ -90,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    ProjectModel projectModel = dataSnapshot.getValue(ProjectModel.class);
+                    ProjectModelClient projectModel = dataSnapshot.getValue(ProjectModelClient.class);
                     recycleList.add(projectModel);
                 }
 
@@ -102,6 +74,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-    }
 
+    }
 }

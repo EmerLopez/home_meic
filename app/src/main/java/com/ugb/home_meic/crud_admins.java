@@ -2,13 +2,9 @@ package com.ugb.home_meic;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -31,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class crud_users extends AppCompatActivity {
+public class crud_admins extends AppCompatActivity {
     private List<Persona> listPerson = new ArrayList<Persona>();
     ArrayAdapter<Persona> arrayAdapterPersona;
     TextView titulo;
@@ -42,19 +38,17 @@ public class crud_users extends AppCompatActivity {
 
     Button agregar, guardar, eliminar;
 
-
-
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     boolean validar = false;
 
     Persona personaSelected;
-    @SuppressLint({"MissingInflatedId", "WrongViewCast"})
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crud_users);
-
+        setContentView(R.layout.activity_crud_admins);
         nomP = findViewById(R.id.txt_nombrePersona);
         appP = findViewById(R.id.txt_appPersona);
         correoP = findViewById(R.id.txt_correoPersona);
@@ -65,13 +59,13 @@ public class crud_users extends AppCompatActivity {
         back = findViewById(R.id.btn_back);
         titulo = findViewById(R.id.tv_title_toolbar);
 
-        titulo.setText("Administracion de Usuarios");
+        titulo.setText("Administradores");
 
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(crud_users.this, Menu_principal.class);
+                Intent intent = new Intent(crud_admins.this, Menu_principal.class);
                 startActivity(intent);
                 finish();
             }
@@ -88,7 +82,7 @@ public class crud_users extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 
-               validar = true;
+                validar = true;
 
                 personaSelected = (Persona) parent.getItemAtPosition(position);
                 nomP.setText(personaSelected.getNombre());
@@ -119,8 +113,8 @@ public class crud_users extends AppCompatActivity {
                     p.setApellido(app);
                     p.setCorreo(correo);
                     p.setPassword(password);
-                    databaseReference.child("Persona").child(p.getUid()).setValue(p);
-                    Toast.makeText(crud_users.this, "Agregado", Toast.LENGTH_LONG).show();
+                    databaseReference.child("Administrador").child(p.getUid()).setValue(p);
+                    Toast.makeText(crud_admins.this, "Agregado", Toast.LENGTH_LONG).show();
                     limpiarCajas();
                 }
                 validar = false;
@@ -145,11 +139,11 @@ public class crud_users extends AppCompatActivity {
                     p.setApellido(appP.getText().toString().trim());
                     p.setCorreo(correoP.getText().toString().trim());
                     p.setPassword(passwordP.getText().toString().trim());
-                    databaseReference.child("Persona").child(p.getUid()).setValue(p);
-                    Toast.makeText(crud_users.this,"Actualizado", Toast.LENGTH_LONG).show();
+                    databaseReference.child("Administrador").child(p.getUid()).setValue(p);
+                    Toast.makeText(crud_admins.this,"Actualizado", Toast.LENGTH_LONG).show();
                     limpiarCajas();
                 }else {
-                    Toast.makeText(crud_users.this,"Error al guardar", Toast.LENGTH_LONG).show();
+                    Toast.makeText(crud_admins.this,"Error al guardar", Toast.LENGTH_LONG).show();
                 }
 
 
@@ -169,11 +163,11 @@ public class crud_users extends AppCompatActivity {
                 if (validar==true){
                     Persona p = new Persona();
                     p.setUid(personaSelected.getUid());
-                    databaseReference.child("Persona").child(p.getUid()).removeValue();
-                    Toast.makeText(crud_users.this,"Eliminado", Toast.LENGTH_LONG).show();
+                    databaseReference.child("Administrador").child(p.getUid()).removeValue();
+                    Toast.makeText(crud_admins.this,"Eliminado", Toast.LENGTH_LONG).show();
                     limpiarCajas();
                 }else {
-                    Toast.makeText(crud_users.this,"Error al eliminar", Toast.LENGTH_LONG).show();
+                    Toast.makeText(crud_admins.this,"Error al eliminar", Toast.LENGTH_LONG).show();
                 }
 
 
@@ -181,12 +175,10 @@ public class crud_users extends AppCompatActivity {
             }
         });
 
- }
-
-
+    }
 
     private void listarDatos() {
-        databaseReference.child("Persona").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Administrador").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listPerson.clear();
@@ -194,7 +186,7 @@ public class crud_users extends AppCompatActivity {
                     Persona p = objSnaptshot.getValue(Persona.class);
                     listPerson.add(p);
 
-                    arrayAdapterPersona = new ArrayAdapter<Persona>(crud_users.this, android.R.layout.simple_list_item_1, listPerson);
+                    arrayAdapterPersona = new ArrayAdapter<Persona>(crud_admins.this, android.R.layout.simple_list_item_1, listPerson);
                     listV_personas.setAdapter(arrayAdapterPersona);
                 }
             }

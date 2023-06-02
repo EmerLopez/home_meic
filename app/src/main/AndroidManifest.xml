@@ -23,6 +23,18 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".SingleClient"
+            android:exported="false" />
+        <activity
+            android:name=".catalogo_actividades"
+            android:exported="false" />
+        <activity
+            android:name=".crud_admins"
+            android:exported="false" />
+        <activity
+            android:name=".acceso_admins"
+            android:exported="false" />
+        <activity
             android:name=".crud_users"
             android:exported="false" />
         <activity

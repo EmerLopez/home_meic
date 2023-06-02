@@ -1,5 +1,6 @@
 package com.ugb.home_meic;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -58,20 +59,38 @@ public class Menu_principal extends AppCompatActivity implements NavigationView.
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Inicio()).commit();
                 break;
 
-            case R.id.nav_calificanos:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Valoranos()).commit();
+            case R.id.nav_admins:
+                Intent intent4 = new Intent(Menu_principal.this, crud_admins.class);
+                startActivity(intent4);
+                finish();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Valoranos()).commit();
                 break;
 
             case R.id.nav_compartir:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Compartir()).commit();
+                Intent intent3 = new Intent(Menu_principal.this, catalogo_actividades.class);
+                startActivity(intent3);
+                finish();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Compartir()).commit();
                 break;
 
             case R.id.nav_sobre_nosotros:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Nosotros()).commit();
+                Intent intent = new Intent(Menu_principal.this, crud_users.class);
+                startActivity(intent);
+                finish();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Nosotros()).commit();
                 break;
 
             case R.id.nav_cerrar_sesion:
-                Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show();
+                Intent intent1 = new Intent(Menu_principal.this, IniciarSesion.class);
+                startActivity(intent1);
+                finish();
+                Toast.makeText(this, "Cerrar Sesion", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.nav_todas_las_categorias:
+                Intent intentuser = new Intent(Menu_principal.this, MainActivity.class);
+                startActivity(intentuser);
+                finish();
                 break;
         }
 

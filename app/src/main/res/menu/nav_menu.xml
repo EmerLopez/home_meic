@@ -17,13 +17,17 @@
         <item
 
             android:id="@+id/nav_todas_las_categorias"
-            android:title="Categorias"
-            android:icon="@drawable/categorias_icono"/>
+            android:title="Productos"
+            android:icon="@drawable/icon_productos"/>
 
         <item
             android:id="@+id/nav_sobre_nosotros"
-            android:title="Nosotros"
+            android:title="Usuarios"
             android:icon="@drawable/nosotros_icono"/>
+        <item
+            android:id="@+id/nav_admins"
+            android:title="Administradores"
+            android:icon="@drawable/icon_admins"/>
 
 
     </group>

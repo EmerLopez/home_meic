@@ -26,6 +26,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class IniciarSesion extends AppCompatActivity {
 
+
+    ImageView img;
     EditText TextEmail, TextPassword;
     Button Isesion;
 
@@ -45,6 +47,15 @@ public class IniciarSesion extends AppCompatActivity {
         TextPassword  = (EditText) findViewById(R.id.lo_contrasena);
         Isesion = findViewById(R.id.lo_continuar);
         registrarse = findViewById(R.id.lo_registrarse);
+        img = findViewById(R.id.ini_logo_imagen);
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentImg = new Intent(IniciarSesion.this, acceso_admins.class);
+                startActivity(intentImg);
+                finish();
+            }
+        });
 
 
         DB = new DBHelper(this);

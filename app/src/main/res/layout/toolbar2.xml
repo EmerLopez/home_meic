@@ -30,7 +30,7 @@
                 android:id="@+id/icontoolbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/baseline_update_24"
+                android:background="@drawable/icon_actualizar"
 
                 android:layout_alignParentEnd="true"/>
 
