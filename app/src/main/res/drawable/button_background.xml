@@ -1,0 +1,16 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape>
+            <solid android:color="#E1FFD597" /> <!-- Color del fondo cuando se presiona el botón -->
+            <stroke android:color="#000000" /> <!-- Color del borde cuando se presiona el botón -->
+            <corners android:radius="8dp" /> <!-- Radio de las esquinas del botón -->
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <solid android:color="#BAF8C478" /> <!-- Color del fondo cuando el botón no está presionado -->
+            <stroke android:color="#000000" /> <!-- Color del borde cuando el botón no está presionado -->
+            <corners android:radius="8dp" /> <!-- Radio de las esquinas del botón -->
+        </shape>
+    </item>
+</selector>

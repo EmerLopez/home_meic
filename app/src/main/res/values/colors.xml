@@ -29,6 +29,7 @@
     <color name="card10">#F6D8D0</color>
     <color name="card11">#ECC4F3</color>
     <color name="card12">#C0DBF1</color>
+    <color name="card13">#63EEDDA8</color>
 
 
 
@@ -41,5 +42,8 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+
     <color name="lavender">#F8C478</color>
+
+    <color name="lavender2">#BAF8C478</color>
 </resources>

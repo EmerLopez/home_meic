@@ -7,7 +7,8 @@
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/lavender">
         <ImageView
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"
@@ -21,7 +22,7 @@
             android:layout_marginLeft="20dp"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/black"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -31,7 +32,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/icon_actualizar"
-
+                android:layout_marginEnd="20dp"
+                android:backgroundTint="@color/black"
                 android:layout_alignParentEnd="true"/>
 
     </RelativeLayout>
