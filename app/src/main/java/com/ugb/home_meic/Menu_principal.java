@@ -67,10 +67,13 @@ public class Menu_principal extends AppCompatActivity implements NavigationView.
                 break;
 
             case R.id.nav_compartir:
+                /*
                 Intent intent3 = new Intent(Menu_principal.this, catalogo_actividades.class);
                 startActivity(intent3);
                 finish();
-                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Compartir()).commit();
+
+                 */
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Compartir()).commit();
                 break;
 
             case R.id.nav_sobre_nosotros:

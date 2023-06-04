@@ -23,6 +23,13 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.ugb.home_meic.model.Persona;
 
 public class IniciarSesion extends AppCompatActivity {
 
@@ -31,7 +38,7 @@ public class IniciarSesion extends AppCompatActivity {
     EditText TextEmail, TextPassword;
     Button Isesion;
 
-
+    private DatabaseReference databaseReference;
     TextView registrarse;
 
     DBHelper DB;
@@ -48,6 +55,9 @@ public class IniciarSesion extends AppCompatActivity {
         Isesion = findViewById(R.id.lo_continuar);
         registrarse = findViewById(R.id.lo_registrarse);
         img = findViewById(R.id.ini_logo_imagen);
+
+
+
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,11 +66,7 @@ public class IniciarSesion extends AppCompatActivity {
                 finish();
             }
         });
-
-
-        DB = new DBHelper(this);
-
-        registrarse.setOnClickListener(new View.OnClickListener() {
+    registrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(IniciarSesion.this, registrarse.class);
@@ -69,16 +75,24 @@ public class IniciarSesion extends AppCompatActivity {
             }
         });
 
+
+
+        DB = new DBHelper(this);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Persona");
+
         Isesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                String email = TextEmail.getText().toString();
+                String correosq = TextEmail.getText().toString().trim();
+                String passwordsq = TextPassword.getText().toString().trim();
+
+                String correo = TextEmail.getText().toString();
                 String password = TextPassword.getText().toString();
 
+                // Crea una consulta a la base de datos para buscar el administrador con el correo ingresado
 
-
-                if (TextUtils.isEmpty(email)){
+                if (TextUtils.isEmpty(correo)){
                     Toast.makeText(IniciarSesion.this, "Ingresa un Correo", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -86,32 +100,59 @@ public class IniciarSesion extends AppCompatActivity {
                     Toast.makeText(IniciarSesion.this, "Ingresa una contraseña", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    Boolean checkuserpass = DB.checkusernamepassword(email, password);
+
+                Boolean checkuserpass = DB.checkusernamepassword(correosq, passwordsq);
+
+                Query query = databaseReference.orderByChild("correo").equalTo(correo);
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-
-
-                        if (task.isSuccessful()){ //&& checkuserpass==true){
-                            Toast.makeText(IniciarSesion.this, "Inicio de sesion con exito", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(IniciarSesion.this, Menu_Cliente.class);
-                            startActivity(intent);
-                            finish();
-                        }else {
-                            if(checkuserpass==true){
-                                Toast.makeText(IniciarSesion.this, "Inicio de sesion sin conexion", Toast.LENGTH_SHORT).show();
-                                Intent intent  = new Intent(getApplicationContext(), Menu_Cliente.class);
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        boolean encontrado = false;
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Persona persona = snapshot.getValue(Persona.class);
+                            if (persona != null && persona.getPassword().equals(password)) {
+                                // Inicio de sesión exitoso
+                                encontrado = true;
+                                Intent intent = new Intent(IniciarSesion.this, Menu_Cliente.class);
                                 startActivity(intent);
-                            }else{
-                                Toast.makeText(IniciarSesion.this, "Credenciales invalidas", Toast.LENGTH_SHORT).show();
+                                finish();
+                                Toast.makeText(IniciarSesion.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+
+                                break;
+
+                            }else {
+                                if(checkuserpass==true){
+                                    Toast.makeText(IniciarSesion.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+                                    Intent intent  = new Intent(getApplicationContext(), Menu_Cliente.class);
+                                    startActivity(intent);
+                                }
                             }
-                        }
-
 
                         }
+
+                        if (!encontrado) {
+
+                            Toast.makeText(IniciarSesion.this, "Credenciale invalidas, vuelva a intentarlo", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        //Toast.makeText(IniciarSesion.this, "Error en la consulta", Toast.LENGTH_SHORT).show();
+                    }
                 });
+
+
+
             }
+
         });
+
+    }
+
+    private void iniciarSesion(String email, String password) {
+
 
     }
 }
