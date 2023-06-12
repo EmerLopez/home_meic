@@ -44,7 +44,7 @@ public class Menu_principal extends AppCompatActivity implements NavigationView.
         toggle.syncState();
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Inicio()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new adminpant()).commit();
             navigationView.setCheckedItem(R.id.nav_inicio);
         }
 
