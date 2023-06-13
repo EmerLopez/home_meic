@@ -1,26 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:background="@drawable/degradado"
-android:layout_height="match_parent"
 
-tools:context=".MainActivity">
-
-    <include
-        layout="@layout/toolbar2"
+    <androidx.appcompat.widget.SearchView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+android:layout_marginTop="55dp"
+        android:id="@+id/search"
+        app:iconifiedByDefault="false"
+        app:searchHintIcon="@null"
+        app:queryHint="Search..."
+        android:focusable="false"
+        app:closeIcon="@drawable/clear_24"
+        app:searchIcon="@drawable/search_24"
+        android:background="@color/banner_background_icono"/>
+    <include layout="@layout/custom_toolbar"/>
 
 
-    <RelativeLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerView"
+        android:scrollbars="vertical"
+        android:layout_below="@id/search"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/upload"
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -30,19 +42,7 @@ tools:context=".MainActivity">
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="40dp"
         android:backgroundTint="@color/lavender"
-        android:src="@drawable/agregar_iconno"/>
-
-
+        android:src="@drawable/ic_baseline_add_24"
+        app:tint="@color/white" />
 
 </RelativeLayout>
-    <androidx.recyclerview.widget.RecyclerView
-
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/upload"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="65dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp" />
-    </RelativeLayout>

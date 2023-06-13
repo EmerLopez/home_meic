@@ -172,7 +172,7 @@ public class chats extends Activity {
                 urlConnection.setRequestMethod("POST");
                 urlConnection.setRequestProperty("Content-Type", "application/json");
                 urlConnection.setRequestProperty("Accept", "application/json");
-                urlConnection.setRequestProperty("Authorization", "key=AAAAtyZSKPo:APA91bE8Y7zu6hEsJd2x8tA0xBF4yTq3beOw_G0kQ3pSYBurDBVc8AAzv_Qs-2_5PnNm4otb_OujrNCbKYgEIHY2r-MgZX56TZ4UBfzdxQB7CR-4WjKBkdaDOz1yovurUDeluPrvGL9Z");
+                urlConnection.setRequestProperty("Authorization", "key=AAAALUquPbI:APA91bG4rnxTOxP0BdEMwsZ1wfOp3NNw5B0Usl5UzR6UAYhE67ovWODL8x5q85-4t3J_KQyTA3xicDs1HJOS_HTsSrhioM95kfTF_5aIPw8orCvSnTmBD5YtQQPAXemWNWLH8WBRSR7u");
 
                 //set headers and method
                 Writer writer = new BufferedWriter(new OutputStreamWriter(urlConnection.getOutputStream(), "UTF-8"));

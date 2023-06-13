@@ -56,11 +56,14 @@ public class Menu_Cliente extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.nav_compartir:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Compartir()).commit();
+                Intent intent1 = new Intent(Menu_Cliente.this, principalChats.class);
+                startActivity(intent1);
+                finish();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Compartir()).commit();
                 break;
 
             case R.id.nav_todas_las_categorias:
-                Intent intent = new Intent(Menu_Cliente.this, catalogo_actividades.class);
+                Intent intent = new Intent(Menu_Cliente.this, MainActivity.class);
                 startActivity(intent);
                 finish();
 
