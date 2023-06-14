@@ -39,6 +39,30 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".uploadMuebles"
+            android:exported="false" />
+        <activity
+            android:name=".updateMuebles"
+            android:exported="false" />
+        <activity
+            android:name=".mainMuebles"
+            android:exported="false" />
+        <activity
+            android:name=".muebles"
+            android:exported="false" />
+        <activity
+            android:name=".UploadElectro"
+            android:exported="false" />
+        <activity
+            android:name=".updateElectro"
+            android:exported="false" />
+        <activity
+            android:name=".mainElectro"
+            android:exported="false" />
+        <activity
+            android:name=".electrodomesticos"
+            android:exported="false" />
+        <activity
             android:name=".UploadActivity"
             android:exported="false" />
         <activity

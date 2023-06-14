@@ -43,7 +43,7 @@ public class pantalla_bienvenida extends AppCompatActivity {
             @Override
             public void run() {
 
-                Intent intent = new Intent(pantalla_bienvenida.this, Menu_Cliente.class);
+                Intent intent = new Intent(pantalla_bienvenida.this,mainMuebles .class);
 
                 Pair[] pairs = new Pair[2];
                 pairs[0] = new Pair<View, String>(imagen, "logo_imagen");
