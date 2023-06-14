@@ -100,7 +100,7 @@ public class updateMuebles extends AppCompatActivity {
             key = bundle.getString("Key");
             oldImageURL = bundle.getString("Image");
         }
-        databaseReference = FirebaseDatabase.getInstance().getReference("Categoria Muebles ").child(key);
+        databaseReference = FirebaseDatabase.getInstance().getReference("Categoria Muebles").child(key);
         updateImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

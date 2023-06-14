@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailActivity">
+    tools:context=".detailTecnoActivity">
 
 
     <LinearLayout
@@ -183,37 +183,15 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="20dp">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/editButton"
-                    android:layout_width="wrap_content"
+                <Button
+                    android:id="@+id/carrito"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="Añadir al carrito"
+                    android:textColor="@color/colorPrimary">
 
 
-
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_weight="1"
-                    android:drawableLeft="@drawable/ic_baseline_edit_24"
-                    android:text="Editar"
-                    android:textAllCaps="false"
-
-                    android:background="@color/green"
-                    android:textColor="@color/white"
-                    android:textSize="25dp" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/deleteButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:text="Eliminar"
-                    android:drawableLeft="@drawable/baseline_delete_24"
-                    android:textAllCaps="false"
-                    android:layout_weight="1"
-                    android:textColor="@color/white"
-                    android:layout_marginHorizontal="10dp"
-                    android:background="@color/red"
-                    android:textSize="25dp"/>
-
+                </Button>
 
 
 
@@ -221,8 +199,7 @@
             </LinearLayout>
 
         </LinearLayout>
+
     </LinearLayout>
-
-
 
 </ScrollView>

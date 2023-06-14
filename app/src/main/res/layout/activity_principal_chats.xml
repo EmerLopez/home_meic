@@ -4,34 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
+
     tools:context=".principalChats">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvrPhoto"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        app:cardCornerRadius="150dp">
-        <ImageView
-            android:id="@+id/imgPhoto"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </androidx.cardview.widget.CardView>
-    <EditText
-        android:id="@+id/txtNombreUsuario"
-        android:hint="Escribe tu nombre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/cvrPhoto"/>
+    <include layout="@layout/custom_toolbar"/>
 
-    <Button
-        android:id="@+id/btnGuardarUsuario"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtNombreUsuario"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="Guardar Usuario" />
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="60dp"
+
+        android:layout_marginBottom="10dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvrPhoto"
+
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="150dp">
+
+            <ImageView
+                android:id="@+id/imgPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.cardview.widget.CardView>
+
+        <EditText
+            android:id="@+id/txtNombreUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cvrPhoto"
+            android:hint="Escribe tu nombre" />
+
+        <Button
+            android:id="@+id/btnGuardarUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtNombreUsuario"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="Guardar Usuario" />
+    </RelativeLayout>
 </RelativeLayout>

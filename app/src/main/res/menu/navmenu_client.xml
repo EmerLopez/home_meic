@@ -9,21 +9,14 @@
             android:id="@+id/nav_inicio"
             android:title="Inicio"
             android:icon="@drawable/otro_menu_icono"/>
-
-        <item
-            android:id="@+id/nav_buscar"
-            android:title="Buscar"
-            android:icon="@drawable/buscar_icono"/>
         <item
 
-            android:id="@+id/nav_todas_las_categorias"
-            android:title="Productos"
-            android:icon="@drawable/icon_productos"/>
+            android:id="@+id/nav_carrito"
+            android:title="Carrito"
+            android:icon="@drawable/icon_carrito"/>
 
-        <item
-            android:id="@+id/nav_sobre_nosotros"
-            android:title="Nosotros"
-            android:icon="@drawable/nosotros_icono"/>
+
+
 
 
     </group>
@@ -42,15 +35,33 @@
                     android:id="@+id/nav_electrodomesticos"
                     android:title="Electrodomesticos"
                     android:icon="@drawable/electrodomesticos_icono"/>
-
-                <item
-                    android:id="@+id/nav_audio"
-                    android:title="Audio y video"
-                    android:icon="@drawable/sonido_icono"/>
                 <item
                     android:id="@+id/nav_tecnologia"
                     android:title="Tecnologia"
                     android:icon="@drawable/tecnologia_icono"/>
+                <item
+                    android:id="@+id/nav_audio"
+                    android:title="Audio y video"
+                    android:icon="@drawable/sonido_icono"/>
+
+            </group>
+
+        </menu>
+
+    </item>
+
+
+
+    <item android:title="Chat">
+        <menu>
+
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/ChatW"
+                    android:title="Wasapito"
+                    android:icon="@drawable/chat_wasapito"/>
+
 
             </group>
 
@@ -63,11 +74,7 @@
     <item android:title="Perfil">
         <menu>
 
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/nav_login"
-                    android:title="Login"
-                    android:icon="@drawable/abrir_icono"/>
+            <group android:checkableBehavior="none">
                 <item
                     android:id="@+id/perfil"
                     android:title="Perfil"
@@ -76,27 +83,6 @@
                     android:id="@+id/nav_cerrar_sesion"
                     android:title="Cerrar sesión"
                     android:icon="@drawable/cerrar_icono"/>
-
-            </group>
-
-        </menu>
-
-    </item>
-
-
-
-    <item android:title="Compartir">
-        <menu>
-
-            <group android:checkableBehavior="none">
-                <item
-                    android:id="@+id/nav_compartir"
-                    android:title="Compartir"
-                    android:icon="@drawable/compartir_icono"/>
-                <item
-                    android:id="@+id/nav_calificanos"
-                    android:title="Calificanos"
-                    android:icon="@drawable/valorar_icono"/>
 
             </group>
 

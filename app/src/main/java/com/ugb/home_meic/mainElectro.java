@@ -13,6 +13,9 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,8 +33,9 @@ public class mainElectro extends AppCompatActivity {
     ValueEventListener eventListener;
     RecyclerView recyclerView;
     List<DataClass> dataList;
-    MyAdapter adapter;
-
+    MyAdapterElectro adapter;
+    TextView titulo;
+    ImageView back;
     SearchView searchView;
     @SuppressLint("MissingInflatedId")
 
@@ -53,9 +57,9 @@ public class mainElectro extends AppCompatActivity {
         dialog.show();
 
         dataList = new ArrayList<>();
-        adapter = new MyAdapter(mainElectro.this, dataList);
+        adapter = new MyAdapterElectro(mainElectro.this, dataList);
         recyclerView.setAdapter(adapter);
-        databaseReference = FirebaseDatabase.getInstance().getReference("Categoria Electrodomenticos");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Categoria Electrodomesticos");
         dialog.show();
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -93,6 +97,19 @@ public class mainElectro extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(mainElectro.this, UploadElectro.class);
                 startActivity(intent);
+            }
+        });
+
+        titulo = findViewById(R.id.tv_title_toolbar);
+        titulo.setText("Electrodomesticos");
+
+        back = findViewById(R.id.btn_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mainElectro.this, Menu_principal.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

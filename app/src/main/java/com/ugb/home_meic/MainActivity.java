@@ -37,8 +37,9 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     List<DataClass> dataList;
     ImageView back;
-    MyAdapter adapter;
     TextView titulo;
+    MyAdapter adapter;
+
 
     SearchView searchView;
     @SuppressLint("MissingInflatedId")
@@ -104,13 +105,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         titulo = findViewById(R.id.tv_title_toolbar);
-        titulo.setText("Productos");
+        titulo.setText("Tecnologia");
 
         back = findViewById(R.id.btn_back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Menu_Cliente.class);
+                Intent intent = new Intent(MainActivity.this, Menu_principal.class);
                 startActivity(intent);
                 finish();
             }

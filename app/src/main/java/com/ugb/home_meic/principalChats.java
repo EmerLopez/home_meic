@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,6 +38,8 @@ public class principalChats extends Activity {
     Button btnGuarder;
     DatabaseReference databaseReference;
     String miToken;
+    ImageView back;
+    TextView titulo;
 
 
 
@@ -55,6 +58,19 @@ public class principalChats extends Activity {
       btnGuarder.setOnClickListener(v -> {
             uploadPhotoFirestore();
       });
+
+        titulo = findViewById(R.id.tv_title_toolbar);
+        titulo.setText("Chat de Usuarios");
+
+        back = findViewById(R.id.btn_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(principalChats.this, Menu_Cliente.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
     void uploadPhotoFirestore(){
         mostrarMsgToast("Subiendo la foto te confirmaremos cuando este listo");

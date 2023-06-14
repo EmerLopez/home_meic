@@ -54,25 +54,34 @@ public class Menu_Cliente extends AppCompatActivity implements NavigationView.On
             case R.id.nav_inicio:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Inicio()).commit();
                 break;
+            case R.id.ChatW:
+                Intent intent4 = new Intent(Menu_Cliente.this, principalChats.class);
+                startActivity(intent4);
+                finish();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Inicio()).commit();
+                break;
 
-            case R.id.nav_compartir:
-                Intent intent1 = new Intent(Menu_Cliente.this, principalChats.class);
+            case R.id.nav_muebles:
+                Intent intent1 = new Intent(Menu_Cliente.this, catalogoMuebles_Activity.class);
                 startActivity(intent1);
                 finish();
                 //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Compartir()).commit();
                 break;
 
-            case R.id.nav_todas_las_categorias:
-                Intent intent = new Intent(Menu_Cliente.this, MainActivity.class);
+            case R.id.nav_electrodomesticos:
+                Intent intent = new Intent(Menu_Cliente.this, catalogoElectro_Activity.class);
                 startActivity(intent);
                 finish();
 
                 //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Compartir()).commit();
                 break;
 
-            case R.id.nav_sobre_nosotros:
+            case R.id.nav_tecnologia:
+                Intent intent3 = new Intent(Menu_Cliente.this, CatalagoTecnologia_Activity.class);
+                startActivity(intent3);
+                finish();
 
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Nosotros()).commit();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Nosotros()).commit();
                 break;
 
             case R.id.nav_cerrar_sesion:

@@ -117,7 +117,7 @@
         android:layout_margin="20dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Lista de Usuarios" />
+        android:text="Lista de Administradores" />
     <ListView
         android:id="@+id/lv_datosPersonas"
         android:layout_width="match_parent"

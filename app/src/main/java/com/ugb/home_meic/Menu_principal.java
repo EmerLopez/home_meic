@@ -66,17 +66,16 @@ public class Menu_principal extends AppCompatActivity implements NavigationView.
                 //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Valoranos()).commit();
                 break;
 
-            case R.id.nav_compartir:
-                /*
-                Intent intent3 = new Intent(Menu_principal.this, catalogo_actividades.class);
+            case R.id.nav_muebles:
+
+                Intent intent3 = new Intent(Menu_principal.this, mainMuebles.class);
                 startActivity(intent3);
                 finish();
 
-                 */
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Compartir()).commit();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Compartir()).commit();
                 break;
 
-            case R.id.nav_sobre_nosotros:
+            case R.id.nav_users:
                 Intent intent = new Intent(Menu_principal.this, crud_users.class);
                 startActivity(intent);
                 finish();
@@ -90,11 +89,19 @@ public class Menu_principal extends AppCompatActivity implements NavigationView.
                 Toast.makeText(this, "Cerrar Sesion", Toast.LENGTH_SHORT).show();
                 break;
 
-            case R.id.nav_todas_las_categorias:
-                Intent intentuser = new Intent(Menu_principal.this, MainActivity.class);
-                startActivity(intentuser);
+            case R.id.nav_electrodomesticos:
+                Intent intentu = new Intent(Menu_principal.this, mainElectro.class);
+                startActivity(intentu);
                 finish();
                 break;
+
+            case R.id.nav_tecnologia:
+                Intent intentt = new Intent(Menu_principal.this, MainActivity.class);
+                startActivity(intentt);
+                finish();
+                break;
+
+
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
