@@ -23,6 +23,7 @@ public class DetailActivity extends AppCompatActivity {
     ImageView detailImage, back;
     Button deleteButton, editButton;
     TextView titulo;
+
     String key = "";
     String imageUrl = "";
     @SuppressLint("MissingInflatedId")

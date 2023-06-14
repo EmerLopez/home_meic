@@ -3,7 +3,10 @@ package com.ugb.home_meic;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,6 +29,8 @@ public class lista_usuarios extends Activity {
     JSONArray datosJSONArray = new JSONArray();
     JSONObject datosJSONObject;
     String miToken;
+    ImageView back;
+    TextView titulo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +39,18 @@ public class lista_usuarios extends Activity {
         ltsUsuarios = findViewById(R.id.ltsUsuarios);
         mostrarListadoUsuarios();
         mostrarChats();
+        titulo = findViewById(R.id.tv_title_toolbar);
+        titulo.setText("");
+
+        back = findViewById(R.id.btn_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(lista_usuarios.this, Menu_Cliente.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
     void mostrarListadoUsuarios(){
         databaseReference = FirebaseDatabase.getInstance().getReference("usuarios");
