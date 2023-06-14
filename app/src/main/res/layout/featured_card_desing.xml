@@ -18,7 +18,7 @@
             android:id="@+id/featured_imagen"
             android:layout_width="match_parent"
             android:layout_height="140dp"
-            android:src="@drawable/producto1"
+            android:src="@drawable/gmail_logo"
             android:scaleType="centerCrop"/>
 
         <TextView

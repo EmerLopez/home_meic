@@ -17,7 +17,7 @@
             android:id="@+id/ms_mueble"
             android:layout_width="210dp"
             android:layout_height="300dp"
-            android:src="@drawable/producto2"
+            android:src="@drawable/googleg_disabled_color_18"
             android:scaleType="centerCrop"/>
         
         <TextView
